@@ -1,14 +1,21 @@
 import speech_recognition as sr
 from time import strftime
 from datetime import date
-import pyttsx3
+import gtts as gTTS
+import playsound
+import os
 import wikipedia
 
-engine = pyttsx3.init()
 r = sr.Recognizer()
 robot = ""
 while True:
 
+    def speak(text):
+        ua = gTTS(text=text, lang="vi")
+        file = 'voices.mp3'
+        ua.save(file)
+        playsound.playsound(file)
+        os.remove(file)
 
     with sr.Microphone() as source:
         print("Robot: Tôi đang nghe")
@@ -34,9 +41,6 @@ while True:
         robot = "tôi là con trí tuệ nhân tạo xịn xò nhất hành tinh"
     elif "tạm biệt" in you:
         robot = "Nhớ giữ gìn sức khỏe đấy nhé"
-        id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_viVN_An"
-        engine.setProperty("voice", id)
-        engine.say(robot)
         print("Robot: " + robot)
         break
     elif "mệt" in you:
@@ -48,8 +52,7 @@ while True:
         robot = wikipedia.summary(you, sentences=1)
     else:
         robot = "Xin lỗi.Bạn có thể nói lại được không"
-    id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_viVN_An"
-    engine.setProperty("voice", id)
-    engine.say(robot)
+    speak(robot)
     print("Robot: " + robot)
-    engine.runAndWait()
+
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
