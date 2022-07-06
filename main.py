@@ -47,6 +47,8 @@ while True:
         robot = "Bạn nên nghỉ ngơi"
     elif "đau" in you:
         robot = "cứu cứu cứu cứu cứu"
+    elif "ngu" in you:
+        robot = "AI if else thì chả ngu thì sao :)"
     elif you:
         wikipedia.set_lang("vi")
         robot = wikipedia.summary(you, sentences=1)
